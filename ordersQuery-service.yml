@@ -1,0 +1,28 @@
+server:
+  port: 8008
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+sleuth:
+    sampler:
+      probability: 1
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: orderQuery-ServiceDB
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: gid-query
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties.spring.json.trusted.packages: "*"
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+  zipkin:
+    base-url: http://localhost:9411/
